@@ -69,3 +69,12 @@ def change_password(request):
         return HttpResponse('Failed to update password', status=400)
 
     return HttpResponse('password successfully updated', status=200)
+
+
+@require_http_methods(['GET'])
+def get_all_users(request):
+    """Retrieve all existing users"""
+    users = CustomUser.get_all_users()
+    data = [user.to_dict() for user in users]
+
+    return JsonResponse(data, status=200, safe=False)
