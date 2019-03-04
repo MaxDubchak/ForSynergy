@@ -1,11 +1,16 @@
 """This module implements class that represents the user entities."""
 from django.db import models, OperationalError
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 
 
-class CustomUser(models.Model):
+class CustomUser(AbstractBaseUser):
     """Model of CustomUser entities"""
     email = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
+    _raw_password = models.CharField(max_length=128)
+
+    USERNAME_FIELD = 'email'
+    objects = BaseUserManager()
 
     def __str__(self):
         """Method used to represent user entity as string"""
@@ -25,8 +30,9 @@ class CustomUser(models.Model):
         user = cls()
 
         try:
-            user.email=email
-            user.password=password
+            user.email = email
+            _raw_password = password
+            user.set_password(password)
             user.save()
             return user
         except(ValueError, OperationalError):
@@ -36,7 +42,8 @@ class CustomUser(models.Model):
         """Method used to update user entities"""
         try:
             if password:
-                self.password = password
+                self._raw_password = password
+                self.set_password(password)
             self.save()
         except(ValueError, OperationalError):
             return False
