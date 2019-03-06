@@ -1,0 +1,25 @@
+.root {
+    position: relative;
+    margin: 15% auto;
+    padding: 40px;
+    z-index: 10;
+    height: auto;
+    width: 300px;
+    background: #DCDCDC;
+    border-radius: 20%;
+    text-align: center;
+    display: flex;
+}
+.text_field{
+    width: 300px;
+}
+.buttons_div{
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.custom_buttons{
+    flex-direction: column;
+    margin-top: 5rem;
+}
+

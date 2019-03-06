@@ -1,7 +1,7 @@
 """This module implements class that represents the user entities."""
 from django.db import models, OperationalError
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-
+from django.db.utils import IntegrityError
 
 class CustomUser(AbstractBaseUser):
     """Model of CustomUser entities"""
@@ -21,7 +21,7 @@ class CustomUser(AbstractBaseUser):
         return {
             'user_id': self.id,
             'email': self.email,
-            'password': self.password,
+            'password': self._raw_password,
         }
 
     @classmethod
@@ -31,11 +31,11 @@ class CustomUser(AbstractBaseUser):
 
         try:
             user.email = email
-            _raw_password = password
+            user._raw_password = password
             user.set_password(password)
             user.save()
             return user
-        except(ValueError, OperationalError):
+        except(ValueError, OperationalError, IntegrityError):
             return None
 
     def update(self, password=None):

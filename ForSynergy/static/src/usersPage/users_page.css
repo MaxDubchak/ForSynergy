@@ -1,0 +1,14 @@
+.root{
+    height: auto;
+    width: 700px;
+    background: #FFFFFF;
+    border-radius: 5%;
+    text-align: center;
+}
+
+.custom_buttons{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+}

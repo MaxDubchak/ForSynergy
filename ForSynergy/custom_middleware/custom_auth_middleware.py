@@ -3,8 +3,8 @@
 from django.http import HttpResponse
 
 GUEST_PATHS = [
-    '/user/login',
-    '/user/register',
+    '/api/user/login',
+    '/api/user/register',
 ]
 
 
@@ -20,6 +20,9 @@ class CustomAuthMiddleware:
 
     def __call__(self, request):
         """Provide authentication validations on middleware call."""
+        if not request.path_info.startswith('/api'):
+            response = self.get_response(request)
+            return response
 
         for path in GUEST_PATHS:
             if request.path_info.startswith(path):
@@ -29,7 +32,7 @@ class CustomAuthMiddleware:
                 return response
 
         if not request.user.is_authenticated:
-            return HttpResponse('Unavailable for unavailable for unauthenticated users', status=403)
+            return HttpResponse('Unavailable for unauthenticated users', status=403)
 
         response = self.get_response(request)
         return response

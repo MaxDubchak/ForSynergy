@@ -101,8 +101,8 @@ venv.bak/
 .mypy_cache/
 
 # PyCharm
-.idea/
-.idea/workspace.xml
+.idea/*
+.idea/misc.xml
 .DS_Store
 
 # VSCode
@@ -112,3 +112,9 @@ venv.bak/
 node_modules/
 package-lock.json
 bundle.js
+
+# Public
+ForSynergy/static/public/*
+
+#Bundles
+ForSynergy/static/bundles/*

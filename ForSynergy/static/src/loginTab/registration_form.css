@@ -1,0 +1,21 @@
+.root{
+    margin: 10% auto;
+    padding: 16px 16px 16px 16px;
+    z-index: 10;
+    height: auto;
+    width: 30%;
+    background: rgba(197, 197, 197, 0.685);
+    border-radius: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text_field{
+    width: 300px;
+}
+
+.custom_buttons{
+    flex-direction: row;
+}

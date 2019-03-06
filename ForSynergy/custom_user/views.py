@@ -4,10 +4,10 @@ from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 
-from ForSynergy.custom_user.models import CustomUser
+from custom_user.models import CustomUser
 
 
-@require_http_methods(['POST', 'GET'])
+@require_http_methods(['POST'])
 def log_in(request):
     """Login of the existing user. Handles post and get requests."""
     data = json.loads(request.body)
@@ -18,12 +18,11 @@ def log_in(request):
         'email': data.get('email'),
         'password': data.get('password'),
     }
-
     user = authenticate(**credentials)
     if not user:
         return HttpResponse('Invalid email or password', status=400)
 
-    login(request, user=user)
+    login(request, user)
 
     return HttpResponse('Successfully logged in', status=200)
 
@@ -76,5 +75,4 @@ def get_all_users(request):
     """Retrieve all existing users"""
     users = CustomUser.get_all_users()
     data = [user.to_dict() for user in users]
-
     return JsonResponse(data, status=200, safe=False)

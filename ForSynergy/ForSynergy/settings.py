@@ -25,7 +25,7 @@ SECRET_KEY = 'elym562sp4mvba!=0)e$xwc0i#-p=@so*j0r37qf&*kwf*sd3_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'home',
 ]
 
+SESSION_COOKIE_HTTPONLY = False
+
 AUTH_USER_MODEL = 'custom_user.CustomUser'
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

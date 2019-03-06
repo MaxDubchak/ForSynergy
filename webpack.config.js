@@ -1,31 +1,48 @@
-var path = require("path");
-var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  context: __dirname,
-
-  entry: './ForSynergy/static/src/index',
-
+  entry: ['babel-polyfill', path.join(__dirname, 'ForSynergy/static/src/index.js')],
   output: {
-      path: path.resolve('./ForSynergy/static/bundles/'),
-      filename: "[name]-[hash].js",
+    path: path.join(__dirname, 'ForSynergy/static/public'),
+    publicPath: '/',
+    filename: 'bundle.js'
   },
-
-  plugins: [
-    new BundleTracker({filename: './ForSynergy/webpack-stats.json'}),
-  ],
+  watch: true,
+  resolve: {
+    alias: {
+      src: path.join(__dirname, 'ForSynergy/static/src')
+    },
+    extensions: ['*', '.js', '.jsx']
+  },
   module: {
     rules: [
       {
         test: /\.jsx?/,
-        exclude: /node_modules/,
+        include: path.join(__dirname, 'ForSynergy/static/'),
         use: ['babel-loader']
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'raw-loader'
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: ['url-loader', 'file-loader', 'img-loader'],
       }
     ]
   },
-  resolve: {
-    extensions: ['*', '.js', '.jsx']
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    contentBase: './ForSynergy/static/public',
+    watchContentBase: true,
+    compress: true,
+    hot: true
   }
-
 };

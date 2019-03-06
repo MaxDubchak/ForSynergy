@@ -4,9 +4,9 @@
   "description": "This project is my entrance task for SynergyWay",
   "main": "index.js",
   "scripts": {
-    "startserver": "webpack-dev-server --watch-poll --config ./webpack.config.js --mode development",
+    "startserver": "webpack-dev-server --watch-poll --config webpack.config.js --mode development",
     "build": "webpack --config webpack.config.js --progress --colors --mode development",
-    "start": "webpack -d --watch --config ./webpack.config.js",
+    "start": "webpack -d --watch --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch --mode development"
   },
   "repository": {
@@ -19,6 +19,15 @@
     "url": "https://github.com/MaxDubchak/ForSynergy/issues"
   },
   "homepage": "https://github.com/MaxDubchak/ForSynergy#readme",
+  "dependencies": {
+    "@material-ui/icons": "^3.0.1",
+    "@material/icon-button": "^0.44.0",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
@@ -36,14 +45,5 @@
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.14"
-  },
-  "dependencies": {
-    "@material-ui/icons": "^3.0.1",
-    "@material/icon-button": "^0.44.0",
-    "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-router-dom": "^4.3.1"
-  }
+}
 }
